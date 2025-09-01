@@ -1,5 +1,3 @@
-"use server";
-
 import { host } from "@/lib/constants";
 
 export default async function search(req, res) {
@@ -25,6 +23,7 @@ export default async function search(req, res) {
       data,
     });
   } catch (error) {
+    console.log("Error in /api/search :", error);
     return res.status(500).json({
       message: "Internal Server Error",
       success: false,

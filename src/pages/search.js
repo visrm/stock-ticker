@@ -8,12 +8,14 @@ export default function Search() {
   const [input, setInput] = useState("");
   const [data, setData] = useState([]);
 
+  async function fetchSearchResults(key) {
+    const resultJSON = await getStocks(key);
+    resultJSON?.success ? setData(resultJSON?.data) : null;
+  }
+
   useEffect(() => {
-    (async function fetchSearchResults(key = input) {
-      const resultJSON = getStocks(key);
-      resultJSON?.success ? setData(resultJSON?.data) : null;
-    })();
-  }, [input, data]);
+    fetchSearchResults(input);
+  }, [input]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,7 +32,7 @@ export default function Search() {
             method="GET"
             className="block h-full w-full max-w-full"
           >
-            <label className="input input-lg validator w-90 text-base outline-none focus:outline-none border-2 border-grey-300">
+            <label className="input input-lg w-90 text-base outline-none focus:outline-none border-2 border-grey-300">
               <svg
                 className="h-[1em] opacity-50 text-white/75"
                 xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +64,7 @@ export default function Search() {
             </label>
           </form>
 
-          {data.length > 0 && (
+          {input && data.length > 0 && (
             <ul
               className="list bg-base-100 shadow-md overflow-auto text-left h-full w-full"
               id="data-list"

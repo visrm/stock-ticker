@@ -1,5 +1,3 @@
-"use server";
-
 import { host } from "@/lib/constants";
 
 export default async function stockTick(req, res) {
@@ -22,6 +20,7 @@ export default async function stockTick(req, res) {
       data,
     });
   } catch (error) {
+    console.log("Error in /api/stock-tick :", error);
     return res.status(500).json({
       message: "Internal Server Error",
       success: false,

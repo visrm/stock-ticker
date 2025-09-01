@@ -1,11 +1,15 @@
-"use server";
-
 import { host } from "@/lib/constants";
 
 export default async function stockPrice(req, res) {
   try {
     const { stockName } = await req.query;
     let { days, type, limit } = await req.query;
+
+    if (!stockName)
+      res.status(400).json({
+        message: "Enter Stock Symbol/Name",
+        success: false,
+      });
 
     const data = await fetch(
       `${host}/api/assignment/stock/${stockName}/prices?days=${
@@ -28,6 +32,7 @@ export default async function stockPrice(req, res) {
       data,
     });
   } catch (error) {
+    console.log("Error in /api/stock-price :", error);
     return res.status(500).json({
       message: "Internal Server Error",
       success: false,
