@@ -2,8 +2,7 @@ import SingleStockPage from "@/components/singleStockPage";
 import { getStock, getStockPrices } from "@/lib/utils";
 import { useRouter } from "next/router";
 import Layout from "@/pages/stock/layout";
-import { Suspense, useEffect, useState } from "react";
-import CustomLoader from "@/components/CustomLoader";
+import { useEffect, useState } from "react";
 
 export default function StockDetails() {
   const [stock, setStock] = useState([]);
@@ -53,7 +52,7 @@ export default function StockDetails() {
 StockDetails.getLayout = function getLayout(page) {
   return (
     <Layout>
-      <Suspense fallback={<CustomLoader />}>{page}</Suspense>
+      {page}
     </Layout>
   );
 };

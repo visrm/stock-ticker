@@ -1,5 +1,5 @@
 import RootLayout from "@/pages/layout";
-import Search from "./search";
+import Search from "./_search";
 
 export default function Home() {
   return (

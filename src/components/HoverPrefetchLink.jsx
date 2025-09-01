@@ -10,7 +10,7 @@ export default function HoverPrefetchLink({ href, className, children }) {
     <Link
       href={href}
       onMouseEnter={() => setActive(true)}
-      prefetch={active ? null : false}
+      prefetch={active ? true : false}
       className={className}
     >
       {children}

@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
+import Head from "next/head";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,9 +14,9 @@ const geistMono = Geist_Mono({
 export default function Layout({ children }) {
   return (
     <html lang="en">
-      <head>
+      <Head key="stock-page">
         <meta name="keywords" content="stock, stock ticks, trading, fintech" />
-      </head>
+      </Head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased h-full min-h-screen`}
       >
