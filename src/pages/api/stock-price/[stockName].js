@@ -19,7 +19,7 @@ export default async function stockPrice(req, res) {
       .then((res) => res.json())
       .catch((err) => console.log("Stock Prices API Fetch Error \u2013", err));
 
-    if (data.length === 0)
+    if (!data)
       res.status(200).json({
         message: "Prices not found.",
         success: true,

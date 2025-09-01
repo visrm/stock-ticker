@@ -12,7 +12,15 @@ export default function MyApp({ Component, pageProps }) {
         </Link>
       </header>
       <main className="relative block">
-        <Suspense fallback={<CustomLoader />}>
+        <Suspense
+          fallback={
+            <div
+              role="status"
+              aria-label="Loading"
+              className="loading loading-lg loading-spinner text-white"
+            />
+          }
+        >
           <Component {...pageProps} />
         </Suspense>
       </main>

@@ -1,6 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import dayjs from "dayjs";
 
 const DynamicApexStockChart = dynamic(
@@ -80,16 +80,28 @@ export default function SingleStockPage({ stock, prices }) {
     <>
       <section className="flex flex-col flex-nowrap gap-2 py-10 sm:py-12 px-6 sm:px-8 mx-auto w-full max-w-full">
         <div className="p-4 sm:px-6 block w-full max-w-full h-full text-left">
-          <h3 className="text-lg font-medium text-emerald-600">{stock[0]?.company}</h3>
+          <h3 className="text-lg font-medium text-emerald-600">
+            {stock[0]?.company}
+          </h3>
         </div>
-        <div className="p-4 block w-full max-w-[90%] h-full text-left">
-          {chartData.length > 0 && (
-            <DynamicApexStockChart
-              chartData={chartData}
-              chartOptions={chartOptions}
+        <Suspense
+          fallback={
+            <div
+              role="status"
+              aria-label="Loading"
+              className="loading loading-lg loading-spinner"
             />
-          )}
-        </div>
+          }
+        >
+          <div className="p-4 block w-full max-w-[90%] h-full text-left">
+            {chartData.length > 0 && (
+              <DynamicApexStockChart
+                chartData={chartData}
+                chartOptions={chartOptions}
+              />
+            )}
+          </div>
+        </Suspense>
       </section>
     </>
   );

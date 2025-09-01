@@ -66,7 +66,7 @@ export default function Search() {
 
           {input && data.length > 0 && (
             <ul
-              className="list bg-base-100 shadow-md overflow-auto text-left h-full w-full"
+              className="list bg-base-100 shadow-md overflow-y-scroll h-108"
               id="data-list"
             >
               <li className="p-4 pb-2 text-xs opacity-60 tracking-wide">
@@ -75,25 +75,31 @@ export default function Search() {
 
               {data.map((item) => (
                 <li
-                  className="list-row rounded-md overflow-auto"
+                  className="list-row rounded-md h-full flex text-left"
                   key={`${item}-${Math.random()}`}
                 >
                   <HoverPrefetchLink
-                    className={"flex flex-row flex-nowrap gap-2"}
                     href={`/stock/${item?.symbol}`}
-                  >
-                    <div>
-                      <div>{item?.company}</div>
-                      <div className="text-xs uppercase font-semibold opacity-60">
-                        {item?.type}
+                    children={
+                      <div
+                        className={
+                          "flex flex-row flex-nowrap gap-2 items-start"
+                        }
+                      >
+                        <div>
+                          <div>{item?.company}</div>
+                          <div className="text-xs uppercase font-semibold opacity-60">
+                            {item?.type}
+                          </div>
+                        </div>
+                        {item.symbol && (
+                          <span className="justify-end btn btn-xs btn-disabled font-mono w-fit">
+                            {item?.symbol}
+                          </span>
+                        )}
                       </div>
-                    </div>
-                    {item.symbol && (
-                      <span className="btn btn-xs btn-disabled font-mono w-fit">
-                        {item?.symbol}
-                      </span>
-                    )}
-                  </HoverPrefetchLink>
+                    }
+                  />
                 </li>
               ))}
             </ul>
